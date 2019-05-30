@@ -1,20 +1,32 @@
+import re
+
 def parser(text):
-    new_txt = re.sub(r"[^\w]"," ", text)
-    new_txt_lower = new_txt.lower()
-    word_list = new_txt_lower.split(" ")
-    new_word_list = filter(None, word_list)
-    word_count_dict = dict()
+    #使用正则表达式去除标点符号和换行符
+    text = re.sub(r"[^\w]"," ", text)
     
+    #转为小写
+    text = txt.lower()
+    
+    #生成所有单词的列表
+    word_list = new_txt_lower.split(" ")
+    
+    #去除空白单词
+    word_list = filter(None, word_list)
+    
+    #生成单词和词频的字典
+    word_count_dict = dict()
     for word in new_word_list:
         if word not in word_count_dict:
             word_count_dict[word] = 1
         else:
             word_count_dict[word]+= 1
     print(word_count_dict)
-    result = sorted(word_count_dict.items(), key = lambda x:x[0])
-    return result
+    
+    #按照词频排序
+    sorted_word_cnt = sorted(word_count_dict.items(), key = lambda x:x[0])
+    
+    return sorted_word_cnt
 
-text = "I hava A Dream, you know? No, I do not know! And when this hapens."
 with open("F:\\Python\\test.txt",'r') as fin:
     text = fin.read()
     out = parser(text)
